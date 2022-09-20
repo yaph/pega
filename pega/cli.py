@@ -6,11 +6,9 @@ import argparse
 import sys
 import timeit
 
+import pega
+
 from pathlib import Path
-
-from PIL import Image
-
-from pega import dimensions
 
 
 def main():
@@ -26,29 +24,17 @@ def main():
     parser.add_argument('--verbose', '-v', action='store_true', help='Turn on verbose output.')
     cli_args = parser.parse_args()
 
-    with Image.open(cli_args.base) as im_base:
-        im_base.load()
-    # Make sure transparent parts in pasted image are retained.
-    im_base = im_base.convert('RGBA')
+    im_base = pega.load(cli_args.base)
 
     for file_name in cli_args.paste:
-        with Image.open(file_name) as im_paste:
-            im_paste.load()
-
-        # Create new image for each image to paste.
+        # Create a base image copy for each image to paste.
         im_new = im_base.copy()
 
-        # Fit image into calculated dimensions, while preserving its aspect ratio.
-        dim = dimensions(im_base, cli_args.margins)
+        # Fit pasted image into calculated dimensions, while preserving its aspect ratio.
+        dim = pega.dimensions(im_base, cli_args.margins)
+        im_paste = pega.load(file_name)
         im_paste.thumbnail(dim)
-
-        # If dimensions don't match, create a temporary image with correct size and center image to paste on it.
-        if im_paste.size != dim:
-            im_tmp = Image.new('RGBA', dim)
-            x = int((dim[0] - im_paste.width) / 2)
-            y = int((dim[1] - im_paste.height) / 2)
-            im_tmp.paste(im_paste, box=(x, y))
-            im_paste = im_tmp
+        pega.fit(im_paste, dim)
 
         cli_args.output_dir.mkdir(exist_ok=True)
 
