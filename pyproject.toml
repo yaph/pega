@@ -8,7 +8,6 @@ description = 'A command line tool for pasting images on top of other images.'
 readme = "README.md"
 requires-python = ">=3.7"
 license = "MIT"
-keywords = []
 authors = [
   { name = "Ramiro Gómez", email = "code@ramiro.org" },
 ]
@@ -27,6 +26,12 @@ dependencies = [
   "pillow",
 ]
 dynamic = ["version"]
+keywords = [
+    "image-processing",
+]
+
+[project.scripts]
+pega = "pega.cli:main"
 
 [project.urls]
 Documentation = "https://github.com/yaph/pega#readme"
@@ -43,6 +48,7 @@ dependencies = [
   "pytest",
   "pytest-cov",
 ]
+
 [tool.hatch.envs.default.scripts]
 cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pega --cov=tests"
 no-cov = "cov --no-cov"
@@ -63,4 +69,9 @@ exclude_lines = [
   "no cov",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.github",
 ]
