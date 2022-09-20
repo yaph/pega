@@ -50,6 +50,8 @@ def main():
             im_tmp.paste(im_paste, box=(x, y))
             im_paste = im_tmp
 
+        cli_args.output_dir.mkdir(exist_ok=True)
+
         # Use `alpha_composite` because `paste` would keep transparency in pasted image.
         im_new.alpha_composite(im_paste, dest=(cli_args.margins[3], cli_args.margins[0]))
         im_new.save(cli_args.output_dir.joinpath(Path(file_name).stem + '.png'))
