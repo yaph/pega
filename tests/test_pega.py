@@ -18,8 +18,8 @@ def test_dimensions():
 
 def test_fit_same_size():
     im = Image.new('RGBA', BASE_SIZE)
-    pega.fit(im, BASE_SIZE)
-    assert BASE_SIZE == im.size
+    im_fit = pega.fit(im, BASE_SIZE)
+    assert BASE_SIZE == im_fit.size
 
 
 def test_fit_smaller_size():

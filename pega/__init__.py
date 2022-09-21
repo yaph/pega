@@ -12,7 +12,7 @@ def dimensions(im, margins):
 
 
 def fit(im, dim):
-    """Fit image in given dimensions. Modifies the image in place.
+    """Fit image in given dimensions.
 
     If dimensions don't match, create a temporary image with correct size and center the given image on it."""
 
@@ -22,6 +22,8 @@ def fit(im, dim):
         y = int((dim[1] - im.height) / 2)
         im_tmp.paste(im, box=(x, y))
         im = im_tmp
+
+    return im
 
 
 def load(file_name):

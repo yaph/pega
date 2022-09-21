@@ -34,7 +34,7 @@ def main():
         dim = pega.dimensions(im_base, cli_args.margins)
         im_paste = pega.load(file_name)
         im_paste.thumbnail(dim)
-        pega.fit(im_paste, dim)
+        im_paste = pega.fit(im_paste, dim)
 
         cli_args.output_dir.mkdir(exist_ok=True)
 
