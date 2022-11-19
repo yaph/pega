@@ -27,8 +27,8 @@ def fit(im, dim):
 
 
 def load(file_name):
-    """Return Image object in RGBA mode to retain transparent parts."""
+    """Return Image object."""
 
     with Image.open(file_name) as im:
         im.load()
-    return im.convert('RGBA')
+    return im
