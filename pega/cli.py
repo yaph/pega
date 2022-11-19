@@ -18,7 +18,7 @@ def main():
                         help='Base image file name.')
     parser.add_argument('paste', type=str, nargs='+',
                         help='Image to paste on base image. Use wildcard to process multiple files.')
-    parser.add_argument('--margins', '-m', type=int, nargs=4, default=[0, 0, 0, 0],
+    parser.add_argument('--margins', '-m', type=int, nargs=4, default=[0, 0, 0, 0], metavar=('TOP', 'RIGHT', 'BOTTOM', 'LEFT'),
                         help='Top, right, bottom, and left (mnemonic: trouble) margins of pasted image relative to base image.')
     parser.add_argument('--output-dir', '-o', type=Path, default='.', help='Write result image to directory.')
     parser.add_argument('--verbose', '-v', action='store_true', help='Turn on verbose output.')
