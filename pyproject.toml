@@ -50,8 +50,6 @@ dependencies = [
 ]
 
 [tool.hatch.envs.default.scripts]
-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pega --cov=tests"
-no-cov = "cov --no-cov"
 svg2png = "mogrify -format png -path tests/images images/*.svg"
 
 [[tool.hatch.envs.test.matrix]]
